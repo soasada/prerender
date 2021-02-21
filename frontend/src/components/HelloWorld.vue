@@ -4,15 +4,14 @@
   <br>
   <button @click="count++">count is: {{ count }}</button>
   <br>
-  <h2>Order No: {{ order.id }}</h2>
+  <h2>Order No: {{ store.getters.getOrder.id }}</h2>
   <br>
-  <h3>Order Product: {{ order.product }}</h3>
+  <h3>Order Product: {{ store.getters.getOrder.product }}</h3>
 </template>
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import {useStore} from 'vuex';
-import fetch from 'node-fetch';
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -22,14 +21,13 @@ export default defineComponent({
       required: true
     }
   },
-  setup: async () => {
+  setup: () => {
     const store = useStore();
     const count = ref(0);
 
-    const response = await fetch('http://localhost:8080/api/orders');
-    const order = await response.json();
+    store.dispatch('fetchOrder');
 
-    return {store, count, order};
+    return {store, count};
   }
 });
 </script>

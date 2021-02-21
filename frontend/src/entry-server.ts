@@ -40,7 +40,6 @@ function renderPreloadLinks(modules: string[], manifest: any): string {
 }
 
 function renderPreloadLink(file: string): string {
-    console.log("file: " + file)
     if (file.endsWith('.js')) {
         return `<link rel="modulepreload" crossorigin href="${file}">`;
     } else if (file.endsWith('.css')) {
