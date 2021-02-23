@@ -4,15 +4,12 @@ import fetch from 'node-fetch';
 
 interface AppState {
     counter: number,
-    order: Order
+    order: Order | undefined
 }
 
 const state: AppState = {
     counter: 0,
-    order: {
-        id: '',
-        product: ''
-    }
+    order: undefined
 }
 
 export function createAppStore() {
@@ -31,18 +28,27 @@ export function createAppStore() {
                 context.commit('ADD');
             },
             fetchOrder(context: ActionContext<AppState, any>): void {
-                if (!import.meta.env.SSR) {
+                //if (!import.meta.env.SSR) {
+                console.log('fetchOrder');
                     fetch('http://localhost:8080/api/orders')
-                        .then(response => response.json())
-                        .then(order => context.commit('SET_ORDER', order));
-                }
+                        .then(response => {
+                            console.log('json');
+                            return response.json();
+                        })
+                        .then(order => {
+                            console.log('SET_ORDER');
+                            context.commit('SET_ORDER', order);
+                        })
+                        .catch(err => console.log(err));
+                //}
             }
         },
         getters: {
             getCounter(state: AppState): number {
                 return state.counter;
             },
-            getOrder(state: AppState): Order {
+            getOrder(state: AppState): Order | undefined {
+                console.log('getOrder');
                 return state.order;
             }
         }

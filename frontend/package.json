@@ -9,6 +9,7 @@
     "generate": "vite build --ssrManifest --outDir dist/static && npm run build:server && node prerender"
   },
   "dependencies": {
+    "es6-promise": "^4.2.8",
     "node-fetch": "^2.6.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4",
