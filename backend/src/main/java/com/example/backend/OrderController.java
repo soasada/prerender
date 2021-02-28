@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +13,11 @@ import java.util.UUID;
 @RequestMapping("/api/orders")
 public class OrderController {
 
+    @SneakyThrows
     @GetMapping
     public Order order() {
         log.info("Calling GET orders");
+        Thread.sleep(1000);
         return Order.builder()
                 .id(UUID.randomUUID().toString())
                 .product(UUID.randomUUID().toString())

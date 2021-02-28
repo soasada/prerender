@@ -1,6 +1,5 @@
 import {ActionContext, createStore} from 'vuex';
 import Order from '../model/Order';
-import fetch from 'node-fetch';
 
 interface AppState {
     counter: number,
@@ -28,19 +27,16 @@ export function createAppStore() {
                 context.commit('ADD');
             },
             fetchOrder(context: ActionContext<AppState, any>): void {
-                //if (!import.meta.env.SSR) {
-                console.log('fetchOrder');
-                    fetch('http://localhost:8080/api/orders')
-                        .then(response => {
-                            console.log('json');
-                            return response.json();
-                        })
-                        .then(order => {
-                            console.log('SET_ORDER');
-                            context.commit('SET_ORDER', order);
-                        })
-                        .catch(err => console.log(err));
-                //}
+                fetch('http://localhost:8080/api/orders')
+                    .then(response => {
+                        console.log('json');
+                        return response.json();
+                    })
+                    .then(order => {
+                        console.log('SET_ORDER');
+                        context.commit('SET_ORDER', order);
+                    })
+                    .catch(err => console.log(err));
             }
         },
         getters: {
