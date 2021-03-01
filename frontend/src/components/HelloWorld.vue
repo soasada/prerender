@@ -10,16 +10,20 @@
     <h3>Order Product: {{ store.getters.getOrder.product }}</h3>
   </div>
   <div v-else>
-    Loading...
+    <LoadingComponent/>
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue';
 import {useStore} from 'vuex';
+import LoadingComponent from './LoadingComponent.vue';
 
 export default defineComponent({
   name: 'HelloWorld',
+  components: {
+    LoadingComponent
+  },
   props: {
     msg: {
       type: String,

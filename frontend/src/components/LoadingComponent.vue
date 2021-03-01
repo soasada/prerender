@@ -1,5 +1,7 @@
 <template>
-  <p>Loading...</p>
+  <div class="spinner-grow text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </template>
 
 <script lang="ts">

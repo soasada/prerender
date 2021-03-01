@@ -27,7 +27,7 @@ export function createAppStore() {
                 context.commit('ADD');
             },
             fetchOrder(context: ActionContext<AppState, any>): void {
-                fetch('http://localhost:8080/api/orders')
+                fetch('/api/orders')
                     .then(response => {
                         console.log('json');
                         return response.json();
